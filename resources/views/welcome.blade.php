@@ -1,8 +1,8 @@
 @extends('layouts.site')
 
 @section('main')
-<h3>
+<h1>
     Xin Chao
-</h3>
+</h1>
 
 @stop()
