@@ -226,8 +226,11 @@ $menus = config('menu');
           <div class="col-12">
             <!-- Default box -->
             <div class="card">
+              
              
               <div class="card-body">
+                @if(Session::has('error'))
+                
                 @yield('main')
               </div>
               <!-- /.card-body -->
@@ -267,5 +270,6 @@ $menus = config('menu');
 <script src="{{asset('public/ad123')}}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('public/ad123')}}/dist/js/demo.js"></script>
+@yield('js')
 </body>
 </html>

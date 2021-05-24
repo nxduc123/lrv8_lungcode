@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $data = CategoryModel::orderBy('created_at','DESC') -> search()-> paginate(2);
+        $data = CategoryModel::orderBy('created_at','DESC') -> search()-> paginate(20);
        
         return view('admin.category.index', compact('data'));
     }
@@ -81,8 +81,16 @@ class CategoryController extends Controller
      * @param  \App\Models\CategoryModel  $categoryModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategoryModel $categoryModel)
+    public function destroy(CategoryModel $category)
     {
-        //
+        if($category-> products ->count() > 0){
+            return redirect() -> route('category.index') -> with('error', 'Khong the xoa!');
+        }
+        else {
+            $category -> delete();
+            return redirect()-> route('category.index') -> with('success', 'Xoa thanh cong.');
+        }
+        $category -> delete();
+
     }
 }
