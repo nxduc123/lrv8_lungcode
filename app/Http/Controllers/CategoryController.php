@@ -38,8 +38,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request ->validate([
+            'name' => 'required|unique:category',
+            'prioty' => 'required'
+        ],[
+            'name.required' => 'Ten danh muc khong trong',
+            'prioty.required' => 'thu tu uu tien khong trong',
+            'name.unique' => 'Danh Muc da co '
+        ]);
+        if(CategoryModel::created($request -> all())){
+            return redirect()-> route('category.index') -> with('success', 'Them moi danh muc thanh cong');
+            }
+    } 
+      
 
     /**
      * Display the specified resource.
